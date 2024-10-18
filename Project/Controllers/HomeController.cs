@@ -3,7 +3,7 @@ using Project.AppData;
 using Project.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using Microsoft.EntityFrameworkCore;
 namespace Project.Controllers
 {
     public class HomeController : Controller
@@ -30,7 +30,12 @@ namespace Project.Controllers
             List<Category> categories = _db.Categories.Take(2).ToList();
             return View(categories);
         }
-
+        public IActionResult Product()
+        {
+            ViewData["Title"] = "Product List";
+            List<Product> products = _db.Products.Include(p=>p.OrderProducts).ToList();
+            return View(products);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
