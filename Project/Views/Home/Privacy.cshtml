@@ -2,5 +2,12 @@
     ViewData["Title"] = "Privacy Policy";
 }
 <title>@ViewData["Title"] - My Shope</title>
+@model List<Project.Models.Category>
 
 <p>Use this page to detail your site's privacy policy.</p>
+<ul>
+    @foreach(Category cate in Model)
+    {
+        <li>@cate.Name</li>
+    }
+</ul>
