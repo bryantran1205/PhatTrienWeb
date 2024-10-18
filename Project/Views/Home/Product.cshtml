@@ -19,9 +19,7 @@
         {
             <tr>
                 <td>@product.Name </td>
-                <td>
-                    @(product.OrderProducts?.FirstOrDefault()?.Price ?? 0)
-                </td>
+                <td>@product.Price</td>
                 <td>@product.Description</td>
             </tr>
         }

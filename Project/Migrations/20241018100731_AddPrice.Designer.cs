@@ -12,8 +12,8 @@ using Project.AppData;
 namespace Project.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20241018025236_DBThird")]
-    partial class DBThird
+    [Migration("20241018100731_AddPrice")]
+    partial class AddPrice
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -314,6 +314,9 @@ namespace Project.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

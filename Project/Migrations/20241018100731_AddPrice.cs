@@ -5,24 +5,25 @@
 namespace Project.Migrations
 {
     /// <inheritdoc />
-    public partial class DBThird : Migration
+    public partial class AddPrice : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<double>(
-                name: "Price",
-                table: "OrderProducts",
-                type: "float",
-                nullable: true);
+            name: "Price",
+            table: "Products",
+            type: "float",
+            nullable: true);
+
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Price",
-                table: "OrderProducts");
+            name: "Price",
+            table: "Products");
         }
     }
 }
