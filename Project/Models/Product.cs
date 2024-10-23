@@ -10,6 +10,6 @@
         public int? CategoryId { get; set; }//Đây là khóa ngoại , cách đặt tên khóa ngoại là Tên của bảng chính+Id
         public Category? Category { get; set; }// Khai báo để lấy được thông tin của Category
         public ICollection<OrderProduct>? OrderProducts { get; set; }
-        public double? Price { get; set; }
+        public string? Price { get; set; }
     }
 }

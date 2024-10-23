@@ -19,7 +19,8 @@ namespace Project.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<Product> products = _db.Products.Take(4).ToList();
+            return View(products);
         }
 
         public IActionResult Privacy()
