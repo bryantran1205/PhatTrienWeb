@@ -19,19 +19,16 @@ namespace Project.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Title"] = "Home Page";
             return View();
         }
 
         public IActionResult Privacy()
         {
-            ViewData["Title"] = "Privacy Policy";
             List<Category> categories = _db.Categories.Take(2).ToList();
             return View(categories);
         }
         public IActionResult Product()
         {
-            ViewData["Title"] = "Product List";
             List<Product> products = _db.Products.ToList();
             return View(products);
         }
