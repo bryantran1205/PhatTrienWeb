@@ -116,13 +116,12 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
                                                 <div class="why-text full-width">
+                                                    <h4>@product.Name</h4>
                                                     @switch (index)
                                                     {
                                                         case 1:
                                                         case 2:
                                                             {
-                                                                <h4>@product.Name</h4>
-                                                                
                                                                 float price = 0f; // Khởi tạo giá trị mặc định cho price là 0
                                                                 if (!string.IsNullOrEmpty(product.Price))
                                                                 {
@@ -131,24 +130,20 @@
 
                                                                 <h5>
                                                                     <del>@product.Price</del>
-                                                                    @(price * 0.8f * 1000)
+                                                                    @(price * 0.8f * 1000) VND
                                                                 </h5>
-                                                                <p>
-                                                                    @product.Description
-                                                                </p>
+                                                                
                                                                 break;
                                                             }
-                                                        <a class="btn hvr-hover" href="#">Add to Cart</a>
+                                                        
                                                         default:
-                                                            <h4>@product.Name</h4>
                                                             <h5>
-                                                                @product.Price
+                                                                @product.Price VND
                                                             </h5>
-                                                            <p>
-                                                                @product.Description
-                                                            </p>
                                                             break;
                                                     }
+                                                    <p>@product.Description</p>
+                                                    <a class="btn hvr-hover" href="#">Add to Cart</a>
                                                 </div>
                                             </div>
                                         </div>
