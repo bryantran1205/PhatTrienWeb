@@ -41,11 +41,23 @@
                                 <div class="row">
                                     @foreach(var product in Model)
                                     {
+                                        int index = Model.IndexOf(product);
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
                                                 <div class="box-img-hover">
                                                     <div class="type-lb">
-                                                        <p class="sale">Sale</p>
+                                                        @switch (index)
+                                                        {
+                                                            case 1:
+                                                            case 2:
+                                                                <p class="sale">Sale</p>
+                                                                // Sản phẩm thứ 2 và 3 là Sale
+                                                                break;
+                                                            default:
+                                                                <p class="new">New</p>
+                                                                // Các sản phẩm khác là New
+                                                                break;
+                                                        }
                                                     </div>
                                                     <img src="@product.ImagePath" class="img-fluid" alt="Image">
                                                     <div class="mask-icon">
@@ -59,7 +71,6 @@
                                                 </div>
                                                 <div class="why-text">
                                                     <h4>@product.Name</h4>
-                                                    <h4>@product.Description</h4>
                                                     <h5>@product.Price VND</h5>
                                                 </div>
                                             </div>
@@ -67,8 +78,83 @@
                                     }
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="list-view">
-                                <div class="list-view-box">
+                            <div role="tabpanel" class="tab-pane fade" id="list-view">\
+
+                                @foreach (var product in Model)
+                                {
+                                    int index = Model.IndexOf(product);
+                                    <div class="list-view-box">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                                <div class="products-single fix">
+                                                    <div class="box-img-hover">
+                                                        <div class="type-lb">
+                                                            @switch (index)
+                                                            {
+                                                                case 1:
+                                                                case 2:
+                                                                    <p class="sale">Sale</p>
+                                                                    // Sản phẩm thứ 2 và 3 là Sale
+                                                                    break;
+                                                                default:
+                                                                    <p class="new">New</p>
+                                                                    // Các sản phẩm khác là New
+                                                                    break;
+                                                            }
+                                                        </div>
+                                                        <img src="@product.ImagePath" class="img-fluid" alt="Image">
+                                                        <div class="mask-icon">
+                                                            <ul>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                            </ul>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                                                <div class="why-text full-width">
+                                                    @switch (index)
+                                                    {
+                                                        case 1:
+                                                        case 2:
+                                                            {
+                                                                <h4>@product.Name</h4>
+                                                                
+                                                                float price = 0f; // Khởi tạo giá trị mặc định cho price là 0
+                                                                if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    float.TryParse(product.Price, out price); // Thử chuyển đổi nếu Price không phải là null hoặc rỗng
+                                                                }
+
+                                                                <h5>
+                                                                    <del>@product.Price</del>
+                                                                    @(price * 0.8f * 1000)
+                                                                </h5>
+                                                                <p>
+                                                                    @product.Description
+                                                                </p>
+                                                                break;
+                                                            }
+                                                        <a class="btn hvr-hover" href="#">Add to Cart</a>
+                                                        default:
+                                                            <h4>@product.Name</h4>
+                                                            <h5>
+                                                                @product.Price
+                                                            </h5>
+                                                            <p>
+                                                                @product.Description
+                                                            </p>
+                                                            break;
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @* <div class="list-view-box">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
@@ -169,7 +255,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> *@
                             </div>
                         </div>
                     </div>
