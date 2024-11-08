@@ -19,7 +19,9 @@ namespace Project.Controllers
 
         public IActionResult Index()
         {
-            List<Product> products = _db.Products.Take(4).ToList();
+            List<Product> products = _db.Products.ToList();
+            Product productSecond = _db.Products.FirstOrDefault();
+            ViewBag.productsecond=productSecond;
             return View(products);
         }
 
@@ -27,11 +29,6 @@ namespace Project.Controllers
         {
             List<Category> categories = _db.Categories.Take(2).ToList();
             return View(categories);
-        }
-        public IActionResult Product()
-        {
-            List<Product> products = _db.Products.ToList();
-            return View(products);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

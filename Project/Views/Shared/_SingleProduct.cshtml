@@ -1,0 +1,47 @@
+﻿@model Project.Models.Product
+<div class="products-single fix">
+    <div class="box-img-hover">
+        <div class="type-lb">
+            @switch (ViewData["Index"] is int index ? index : -1)
+            {
+                case 1:
+                case 2:
+                    <p class="sale">Sale</p>
+                    // Sản phẩm thứ 2 và 3 là Sale
+                    break;
+                default:
+                    <p class="new">New</p>
+                    // Các sản phẩm khác là New
+                    break;
+            }
+        </div>
+        <img src="@Model.ImagePath" class="img-fluid" alt="Image">
+        <div class="mask-icon">
+            <ul>
+                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+            </ul>
+            <a class="cart" href="#">Add to Cart</a>
+        </div>
+    </div>
+    <div class="why-text">
+        <h4>@Model.Name</h4>
+        @if (ViewData["Index"]?.Equals(1) == true || ViewData["Index"]?.Equals(2) == true)
+        {
+            float price = 0f; // Khởi tạo giá trị mặc định cho price là 0
+            if (!string.IsNullOrEmpty(Model.Price))
+            {
+                float.TryParse(Model.Price, out price); // Thử chuyển đổi nếu Price không phải là null hoặc rỗng
+            }
+            <h5>
+                <del>@Model.Price</del>
+                @(price * 0.8f * 1000) VND
+            </h5>
+        }
+        else
+        {
+            <h5>@Model.Price VND</h5>
+        }
+    </div>
+</div>

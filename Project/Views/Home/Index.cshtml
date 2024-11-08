@@ -3,325 +3,209 @@
 }
 @model List<Project.Models.Product>
     @* Bắt đầu Cắt từ đây *@
-    <!-- Start Slider -->
-    <div id="slides-shop" class="cover-slides">
-        <ul class="slides-container">
-            <li class="text-center">
-                <img src="~/images/banner-01.jpg" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="~/images/banner-02.jpg" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="~/images/banner-03.jpg" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                            <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
-                            <p><a class="btn hvr-hover" href="#">Shop New</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="slides-navigation">
-            <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-            <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-        </div>
-    </div>
-    <!-- End Slider -->
-    <!-- Start Categories  -->
-    <div class="categories-shop">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="~/images/categories_img_01.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="~/images/categories_img_02.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img class="img-fluid" src="~/images/categories_img_03.jpg" alt="" />
-                        <a class="btn hvr-hover" href="#">Lorem ipsum dolor</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Categories -->
-
-    <div class="box-add-products">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="offer-box-products">
-                        <img class="img-fluid" src="~/images/add-img-01.jpg" alt="" />
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="offer-box-products">
-                        <img class="img-fluid" src="~/images/add-img-02.jpg" alt="" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Start Products  -->
-<div class="products-box">
+@{
+    ViewData["Title"] = "Product List";
+}
+@* Start Product *@
+<div class="shop-box-inner">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="title-all text-center">
-                    <h1>Fruits & Vegetables</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="special-menu text-center">
-                    <div class="button-group filter-button-group">
-                        <button class="active" data-filter="*">All</button>
-                        <button data-filter=".top-featured">Top featured</button>
-                        <button data-filter=".best-seller">Best seller</button>
+            <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                <div class="right-product-box">
+                    <div class="product-item-filter row">
+                        <div class="col-12 col-sm-8 text-center text-sm-left">
+                            <div class="toolbar-sorter-right">
+                                <span>Sort by </span>
+                                <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+                                    <option data-display="Select">Nothing</option>
+                                    <option value="1">Popularity</option>
+                                    <option value="2">High Price → High Price</option>
+                                    <option value="3">Low Price → High Price</option>
+                                    <option value="4">Best Selling</option>
+                                </select>
+                            </div>
+                            <p>Showing all @Model.Count results</p>
+                        </div>
+                        <div class="col-12 col-sm-4 text-center text-sm-right">
+                            <ul class="nav nav-tabs ml-auto">
+                                <li>
+                                    <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product-categorie-box">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                <div class="row">
+                                    @foreach(var product in Model)
+                                    {
+                                        int index = Model.IndexOf(product);
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                            <div class="products-single fix">
+                                                <div class="box-img-hover">
+                                                    <div class="type-lb">
+                                                        @switch (index)
+                                                        {
+                                                            case 1:
+                                                            case 2:
+                                                                <p class="sale">Sale</p>
+                                                                // Sản phẩm thứ 2 và 3 là Sale
+                                                                break;
+                                                            default:
+                                                                <p class="new">New</p>
+                                                                // Các sản phẩm khác là New
+                                                                break;
+                                                        }
+                                                    </div>
+                                                    <a href="@Url.Action("Detail", "Product", new { id = product.Id })">
+                                                        <img src="@product.ImagePath" class="img-fluid" alt="Image">
+                                                    </a>
+                                                    <div class="mask-icon" onclick="window.location.href='@Url.Action("Detail", "Product", new { id = product.Id })'" style="cursor: pointer;">
+                                                        <ul>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                        </ul>
+                                                        <a class="cart" href="#">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                                <div class="why-text">
+                                                    <h4>@product.Name</h4>
+                                                    <h5>@product.Price VND</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="list-view">
+
+                                @foreach (var product in Model)
+                                {
+                                    int index = Model.IndexOf(product);
+                                    <div class="list-view-box">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                                <div class="products-single fix">
+                                                    <div class="box-img-hover">
+                                                        <div class="type-lb">
+                                                            @switch (index)
+                                                            {
+                                                                case 1:
+                                                                case 2:
+                                                                    <p class="sale">Sale</p>
+                                                                    // Sản phẩm thứ 2 và 3 là Sale
+                                                                    break;
+                                                                default:
+                                                                    <p class="new">New</p>
+                                                                    // Các sản phẩm khác là New
+                                                                    break;
+                                                            }
+                                                        </div>
+                                                        <a href="@Url.Action("Detail", "Product", new { id = product.Id })">
+                                                            <img src="@product.ImagePath" class="img-fluid" alt="Image">
+                                                        </a>
+                                                        <div class="mask-icon" onclick="window.location.href='@Url.Action("Detail", "Product", new { id = product.Id })'" style="cursor: pointer;">
+                                                            <ul>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                                                <div class="why-text full-width">
+                                                    <h4>@product.Name</h4>
+                                                    @switch (index)
+                                                    {
+                                                        case 1:
+                                                        case 2:
+                                                            {
+                                                                float price = 0f; // Khởi tạo giá trị mặc định cho price là 0
+                                                                if (!string.IsNullOrEmpty(product.Price))
+                                                                {
+                                                                    float.TryParse(product.Price, out price); // Thử chuyển đổi nếu Price không phải là null hoặc rỗng
+                                                                }
+
+                                                                <h5>
+                                                                    <del>@product.Price</del>
+                                                                    @(price * 0.8f * 1000) VND
+                                                                </h5>
+                                                                
+                                                                break;
+                                                            }
+                                                        
+                                                        default:
+                                                            <h5>
+                                                                @product.Price VND
+                                                            </h5>
+                                                            break;
+                                                    }
+                                                    <p>@product.Description</p>
+                                                    <a class="btn hvr-hover" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @* @foreach (var product in Model)
+                                {
+                                    int index = Model.IndexOf(product);
+                                    ViewData["Index"] = index;
+                                    @await Html.PartialAsync("_SingleProduct", product, ViewData)
+                                } *@
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row special-list">
-            @foreach (var product in Model)
-            {
-                // Xác định chỉ số của sản phẩm trong danh sách
-                int index = Model.IndexOf(product);
-
-                // Kiểm tra chỉ số và phân loại sản phẩm
-                @* string columnClass = (index == 2 || index== 3) ? "col-lg-3 col-md-6 special-grid best-seller" : "col-lg-3 col-md-6 special-grid top-featured"; *@
-                string columnClass;
-                //Phân loại theo switch case
-                switch (index)
-                {
-                    case 2:
-                    case 3:
-                        columnClass = "col-lg-3 col-md-6 special-grid best-seller";
-                        break;
-                    default:
-                        columnClass = "col-lg-3 col-md-6 special-grid top-featured";
-                        break;
-                }
-                <div class="@columnClass">
-                    <div class="products-single fix">
-                        <div class="box-img-hover">
-                            <div class="type-lb">
-                                <p class="sale">Sale</p>
-                            </div>
-                            <a href="@Url.Action("Detail", "Product", new { id = product.Id })">
-                                <img src="@product.ImagePath" class="img-fluid" alt="Image">
-                            </a>
-                            <div class="mask-icon" onclick="window.location.href='@Url.Action("Detail", "Product", new { id = product.Id })'" style="cursor: pointer;">
-                                <ul>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                </ul>
-                                <a class="cart" href="#">Add to Cart</a>
-                            </div>
+            <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                <div class="product-categori">
+                    <div class="search-product">
+                        <form action="#">
+                            <input class="form-control" placeholder="Search here..." type="text">
+                            <button type="submit"> <i class="fa fa-search"></i> </button>
+                        </form>
+                    </div>
+                    @* Category ở đây *@
+                    @await Component.InvokeAsync("Category")
+                    @* End Category ở đây  *@
+                    <div class="filter-price-left">
+                        <div class="title-left">
+                            <h3>Price</h3>
                         </div>
-                        <div class="why-text">
-                            <h4>@product.Name</h4>
-                            <h4>Mô tả: @product.Description</h4>
-                            <h5>@product.Price VND</h5>
+                        <div class="price-box-slider">
+                            <div id="slider-range"></div>
+                            <p>
+                                <input type="text" id="amount" readonly style="border:0; color:#fbb714; font-weight:bold;">
+                                <button class="btn hvr-hover" type="submit">Filter</button>
+                            </p>
                         </div>
                     </div>
                 </div>
-            }
+            </div>
         </div>
     </div>
 </div>
-    <!-- End Products  -->
-
-    <!-- Start Blog  -->
-    <div class="latest-blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>latest blog</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="~/images/blog-img.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="~/images/blog-img-01.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="~/images/blog-img-02.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Blog  -->
-
-    <!-- Start Instagram Feed  -->
-    <div class="instagram-box">
-        <div class="main-instagram owl-carousel owl-theme">
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-01.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-02.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-03.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-04.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-05.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-06.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-07.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-08.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-09.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="~/images/instagram-img-05.jpg" alt="" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Instagram Feed  -->
+@* Nhóm Sản Phẩm 2  *@
+<p>Sản phẩm thứ 2</p>
+@* <div class="row">
+@foreach (var product in Model)
+{
+    int index = Model.IndexOf(product);
+    ViewData["Index"] = index;
+    @await Html.PartialAsync("_SingleProduct", product, ViewData)
+}
+</div> *@
+@* End Product *@
     @* Kết thúc cắt ở đây *@
