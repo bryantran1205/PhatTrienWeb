@@ -82,17 +82,37 @@
                                         </div>
                                     }
                                 </div>
-                                <div>
-                                    <p>Sản phẩm Sale</p> <br />
+                                @* Nhóm sản phẩm thứ 2  *@
+                                <div class="product-item-filter row title-left">
+                                    <h3>Sản phẩm Sale</h3> <br />
                                 </div>
                                 <br />
                                 <div class="row">
                                 @foreach (var product in Model)
                                 {
                                     int index = Model.IndexOf(product);
-                                    ViewData["Index"] = index;
-                                    @await Html.PartialAsync("_SingleProduct", product, ViewData)
+                                        if (index == 1 || index == 2)
+                                        {
+                                            ViewData["Index"] = index;
+                                            @await Html.PartialAsync("_SingleProduct", product, ViewData)
+                                        }
                                 }
+                                </div>
+                                @* Nhóm sản phẩm thứ 3  *@
+                                <div class="product-item-filter row title-left">
+                                    <h3>Sản phẩm New</h3> <br />
+                                </div>
+                                <br />
+                                <div class="row">
+                                    @foreach (var product in Model)
+                                    {
+                                        int index = Model.IndexOf(product);
+                                        if (index != 1 && index != 2)
+                                        {
+                                            ViewData["Index"] = index;
+                                            @await Html.PartialAsync("_SingleProduct", product, ViewData)
+                                        }
+                                    }
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="list-view">
@@ -203,15 +223,5 @@
         </div>
     </div>
 </div>
-@* Nhóm Sản Phẩm 2  *@
-<p>Sản phẩm thứ 2</p>
-@* <div class="row">
-@foreach (var product in Model)
-{
-    int index = Model.IndexOf(product);
-    ViewData["Index"] = index;
-    @await Html.PartialAsync("_SingleProduct", product, ViewData)
-}
-</div> *@
 @* End Product *@
     @* Kết thúc cắt ở đây *@
