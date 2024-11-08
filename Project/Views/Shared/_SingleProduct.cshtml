@@ -17,8 +17,10 @@
                             break;
                     }
                 </div>
+            <a href="@Url.Action("Detail", "Product", new { id = Model.Id })">
                 <img src="@Model.ImagePath" class="img-fluid" alt="Image">
-                <div class="mask-icon">
+            </a>
+            <div class="mask-icon" onclick="window.location.href='@Url.Action("Detail", "Product", new { id = Model.Id })'" style="cursor: pointer;">
                     <ul>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
