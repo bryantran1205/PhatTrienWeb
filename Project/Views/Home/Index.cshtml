@@ -82,6 +82,18 @@
                                         </div>
                                     }
                                 </div>
+                                <div>
+                                    <p>Sản phẩm Sale</p> <br />
+                                </div>
+                                <br />
+                                <div class="row">
+                                @foreach (var product in Model)
+                                {
+                                    int index = Model.IndexOf(product);
+                                    ViewData["Index"] = index;
+                                    @await Html.PartialAsync("_SingleProduct", product, ViewData)
+                                }
+                                </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="list-view">
 
@@ -158,12 +170,6 @@
                                         </div>
                                     </div>
                                 }
-                                @* @foreach (var product in Model)
-                                {
-                                    int index = Model.IndexOf(product);
-                                    ViewData["Index"] = index;
-                                    @await Html.PartialAsync("_SingleProduct", product, ViewData)
-                                } *@
                             </div>
                         </div>
                     </div>
