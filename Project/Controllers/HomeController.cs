@@ -21,6 +21,7 @@ namespace Project.Controllers
         {
             List<Product> products = _db.Products.ToList();
             Product productSecond = _db.Products.FirstOrDefault();
+            ViewBag.Products = products;
             ViewBag.productsecond=productSecond;
             return View(products);
         }
