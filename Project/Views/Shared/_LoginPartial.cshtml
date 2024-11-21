@@ -4,24 +4,74 @@
 @inject UserManager<AppUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-action="Register" asp-controller="User">Register</a>
-    </li>
-    <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-action="Login" asp-controller="User">Login</a>
-    </li>
-}
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <div class="login-box">
+                <select id="userActionsSignedIn" class="selectpicker show-tick form-control" data-placeholder="Actions">
+                    <option value="" disabled selected>Xin chào, @UserManager.GetUserName(User)!</option>
+                    <option value="@Url.Action("Index", "User")">Quản lý tài khoản</option>
+                    <option value="@Url.Action("Logout", "User")">Đăng xuất</option>
+                </select>
+            </div>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <div class="login-box">
+                <select id="userActionsSignedOut" class="selectpicker show-tick form-control" data-placeholder="Actions">
+                    <option value="" disabled selected>Chọn hành động</option>
+                    <option value="@Url.Action("Register", "User")">Đăng ký</option>
+                    <option value="@Url.Action("Login", "User")">Đăng nhập</option>
+                </select>
+            </div>
+        </li>
+    }
 </ul>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@* <script>
+    $(document).ready(function () {
+    $('#userActionsSignedIn, #userActionsSignedOut').on('change', function () {
+        var selectedValue = $(this).val(); // Lấy giá trị của option được chọn
+
+        if (selectedValue) {
+            // Cập nhật hiển thị của dropdown
+            $(this).selectpicker('val', selectedValue); // Đặt giá trị đã chọn
+            $(this).selectpicker('render'); // Render lại dropdown để hiển thị đúng text
+
+            // Chuyển hướng đến URL tương ứng
+            window.location.href = selectedValue;s 
+        }
+    });
+});
+</script> *@
+<script>
+    $(document).ready(function () {
+    const dropdownId = '#userActionsSignedIn, #userActionsSignedOut';
+
+    // Lấy giá trị từ LocalStorage khi trang tải
+    const savedSelection = localStorage.getItem('userActionSelection');
+    if (savedSelection) {
+        $(dropdownId).selectpicker('val', savedSelection); // Đặt giá trị đã lưu
+        $(dropdownId).selectpicker('render'); // Cập nhật giao diện
+    }
+
+    // Xử lý khi người dùng thay đổi lựa chọn
+    $(dropdownId).on('change', function () {
+        const selectedValue = $(this).val(); // Lấy giá trị của option được chọn
+
+        if (selectedValue) {
+            // Lưu giá trị vào LocalStorage
+            localStorage.setItem('userActionSelection', selectedValue);
+
+            // Chuyển hướng đến URL tương ứng
+            window.location.href = selectedValue;
+        }
+    });
+});
+
+</script>
+
