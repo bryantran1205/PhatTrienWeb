@@ -1,7 +1,7 @@
-/* line 27, bootstrap-select.scss */
+﻿/* line 27, bootstrap-select.scss */
 select.bs-select-hidden,
 select.selectpicker {
-  display: none !important;
+    display: none !important;
 }
 
 /* line 32, bootstrap-select.scss */
@@ -155,6 +155,7 @@ select.selectpicker {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  max-width:300px;
 }
 /* line 205, bootstrap-select.scss */
 .bootstrap-select.btn-group .dropdown-menu.inner {

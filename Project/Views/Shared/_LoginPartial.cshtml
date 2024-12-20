@@ -6,72 +6,105 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        var email = UserManager.GetUserName(User);
+        var username = email?.Split('@')[0] ?? "Guest";
         <li class="nav-item">
-            <div class="login-box">
+                <div class="login-box">
                 <select id="userActionsSignedIn" class="selectpicker show-tick form-control" data-placeholder="Actions">
-                    <option value="" disabled selected>Xin chào, @UserManager.GetUserName(User)!</option>
-                    <option value="@Url.Action("Index", "User")">Quản lý tài khoản</option>
-                    <option value="@Url.Action("Logout", "User")">Đăng xuất</option>
-                </select>
-            </div>
-        </li>
+                    <option value="temp" disabled selected>Xin chào, @username!</option>
+                        <option value="@Url.Action("Logout", "User")">Đăng xuất</option>
+                    </select>
+                </div>
+            </li>
     }
     else
     {
-        <li class="nav-item">
-            <div class="login-box">
-                <select id="userActionsSignedOut" class="selectpicker show-tick form-control" data-placeholder="Actions">
-                    <option value="" disabled selected>Chọn hành động</option>
-                    <option value="@Url.Action("Register", "User")">Đăng ký</option>
-                    <option value="@Url.Action("Login", "User")">Đăng nhập</option>
-                </select>
-            </div>
-        </li>
+            <li class="nav-item">
+                <div class="login-box">
+                    <select id="userActionsSignedOut" class="selectpicker show-tick form-control" data-placeholder="Actions">
+                    <option value="temp" disabled selected>Register Here</option>
+                        <option value="@Url.Action("Register", "User")">Đăng ký</option>
+                        <option value="@Url.Action("Login", "User")">Đăng nhập</option>
+                    </select>
+                </div>
+            </li>
     }
 </ul>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-@* <script>
-    $(document).ready(function () {
-    $('#userActionsSignedIn, #userActionsSignedOut').on('change', function () {
-        var selectedValue = $(this).val(); // Lấy giá trị của option được chọn
 
-        if (selectedValue) {
-            // Cập nhật hiển thị của dropdown
-            $(this).selectpicker('val', selectedValue); // Đặt giá trị đã chọn
-            $(this).selectpicker('render'); // Render lại dropdown để hiển thị đúng text
-
-            // Chuyển hướng đến URL tương ứng
-            window.location.href = selectedValue;s 
-        }
-    });
-});
-</script> *@
 <script>
     $(document).ready(function () {
-    const dropdownId = '#userActionsSignedIn, #userActionsSignedOut';
+        const dropdownId = '#userActionsSignedIn, #userActionsSignedOut';
+        const defaultValue = "temp"; // Giá trị mặc định của "Chọn hành động"
 
-    // Lấy giá trị từ LocalStorage khi trang tải
-    const savedSelection = localStorage.getItem('userActionSelection');
-    if (savedSelection) {
-        $(dropdownId).selectpicker('val', savedSelection); // Đặt giá trị đã lưu
-        $(dropdownId).selectpicker('render'); // Cập nhật giao diện
-    }
+        // Kiểm tra nếu đang ở trang Home/Index
+        const isHomePage = window.location.pathname === "/Home/Index";
 
-    // Xử lý khi người dùng thay đổi lựa chọn
-    $(dropdownId).on('change', function () {
-        const selectedValue = $(this).val(); // Lấy giá trị của option được chọn
-
-        if (selectedValue) {
-            // Lưu giá trị vào LocalStorage
-            localStorage.setItem('userActionSelection', selectedValue);
-
-            // Chuyển hướng đến URL tương ứng
-            window.location.href = selectedValue;
+        // Nếu là trang Home/Index, đặt giá trị mặc định và không lấy từ LocalStorage
+        if (isHomePage) {
+            // Đặt giá trị mặc định cho dropdown
+            $(dropdownId).val(defaultValue).change(); // Đặt giá trị và kích hoạt thay đổi giao diện
+            $(dropdownId).selectpicker('refresh'); // Làm mới giao diện dropdown
+        } else {
+            // Nếu không phải trang Home/Index, lấy giá trị từ LocalStorage
+            const savedSelection = localStorage.getItem('userActionSelection');
+            if (savedSelection) {
+                $(dropdownId).selectpicker('val', savedSelection); // Đặt giá trị đã lưu
+                $(dropdownId).selectpicker('render'); // Cập nhật giao diện
+            }
         }
-    });
-});
 
+        // Xử lý khi người dùng thay đổi lựa chọn
+        $(dropdownId).on('change', function () {
+            const selectedValue = $(this).val(); // Lấy giá trị của option được chọn
+
+            if (selectedValue) {
+                // Lưu giá trị vào LocalStorage
+                localStorage.setItem('userActionSelection', selectedValue);
+
+                // Chuyển hướng đến URL tương ứng
+                window.location.href = selectedValue;
+            }
+        });
+    });
 </script>
+@* <script>
+    $(document).ready(function () {
+        const dropdownId = '#userActionsSignedIn, #userActionsSignedOut';
+        const defaultValue = "temp"; // Giá trị mặc định của "Chọn hành động"
+
+        // Kiểm tra nếu đang ở trang Home/Index
+        const isHomePage = window.location.pathname === "/Home/Index";
+
+        // Nếu là trang Home/Index, đặt giá trị mặc định và không lấy từ LocalStorage
+        if (isHomePage) {
+            // Đặt giá trị mặc định cho dropdown
+            $(dropdownId).val(defaultValue).change(); // Đặt giá trị và kích hoạt thay đổi giao diện
+            $(dropdownId).selectpicker('refresh'); // Làm mới giao diện dropdown
+        } else {
+            // Nếu không phải trang Home/Index, lấy giá trị từ LocalStorage
+            const savedSelection = localStorage.getItem('userActionSelection');
+            if (savedSelection) {
+                $(dropdownId).selectpicker('val', savedSelection); // Đặt giá trị đã lưu
+                $(dropdownId).selectpicker('render'); // Cập nhật giao diện
+            }
+        }
+
+        // Xử lý khi người dùng thay đổi lựa chọn
+        $(dropdownId).on('change', function () {
+            const selectedValue = $(this).val(); // Lấy giá trị của option được chọn
+
+            if (selectedValue) {
+                // Lưu giá trị vào LocalStorage
+                localStorage.setItem('userActionSelection', selectedValue);
+
+                // Chuyển hướng đến URL tương ứng
+                window.location.href = selectedValue;
+            }
+        });
+    });
+</script> *@
+
 

@@ -37,6 +37,33 @@ namespace Project.Controllers
         {
             return View();
         }
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    //_logger.LogInformation("User logged in
+                    
+                    return RedirectToAction("Index","Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("login", "Login Fail , Please try again");
+                    return View();
+                }
+            }
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
@@ -45,6 +72,7 @@ namespace Project.Controllers
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.Email = model.Email;
 
                 await _userStore.SetUserNameAsync(user, model.Email, CancellationToken.None);
                 //await _emailStore.SetEmailAsync(user, model.Email, CancellationToken.None);
