@@ -22,7 +22,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(cfg => {                    // Đăng ký dịch vụ Session
-    cfg.Cookie.Name = "Thanh Duy";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+    cfg.Cookie.Name = "ThanhDuy";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
     cfg.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
 });
 var app = builder.Build();
@@ -33,9 +33,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
-
-app.UseRouting();
 app.UseSession();
+app.UseRouting();
 app.UseAuthentication();// nếu không có dòng này thì login thành công vẫn không hiển thị được trạng thái đã đăng nhập
 app.UseAuthorization();
 app.MapControllerRoute(

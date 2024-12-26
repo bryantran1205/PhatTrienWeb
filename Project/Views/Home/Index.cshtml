@@ -71,7 +71,7 @@
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                                                         </ul>
-                                                        <a class="cart" href="#">Add to Cart</a>
+                                                            <a href="javascript:void(0);" onclick="addToCart(@product.Id)">Add to Cart</a>
                                                     </div>
                                                 </div>
                                                 <div class="why-text">
@@ -229,3 +229,15 @@
 </div>
 @* End Product *@
     @* Kết thúc cắt ở đây *@
+<script>
+        // Hàm cập nhật số lượng giỏ hàng trên giao diện
+        function updateCartUI() {
+            const cartCountElement = document.querySelector("#cart-count");
+            fetch("/cart-count", { method: "GET" })
+                .then(response => response.json())
+                .then(data => {
+                    cartCountElement.textContent = data.count; // Cập nhật số lượng
+                });
+        }
+    });
+</script>
