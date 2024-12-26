@@ -1,0 +1,33 @@
+﻿@model Project.Models.Cart
+
+<!-- Badge hiển thị số lượng sản phẩm -->
+<div class="attr-nav">
+    <ul>
+        <li class="side-menu">
+            <a href="#">
+                <i class="fa fa-shopping-bag"></i>
+                <span class="badge" id="cart-count">@Model.Items.Sum(x => x.Quantity)</span>
+                <p>My Cart</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Side Menu hiển thị danh sách sản phẩm -->
+<div class="side">
+    <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+    <ul class="cart-list">
+        @foreach (var item in Model.Items)
+        {
+            <li>
+                <a href="#" class="photo"><img src="@item.ImageUrl" class="cart-thumb" alt="" /></a>
+                <h6><a href="#">@item.ProductName</a></h6>
+                <p>@item.Quantity x - <span class="price">$@item.Price</span></p>
+            </li>
+        }
+        <li class="total">
+            <a href="/Cart" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+            <span class="float-right"><strong>Total</strong>: $@Model.GrandTotal</span>
+        </li>
+    </ul>
+</div>

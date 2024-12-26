@@ -85,4 +85,21 @@
             $("#cart-grandtotal").text(`$${orderDetails.grandTotal.toFixed(2)}`);
         }
     }
+    function updateCartBadge(count) {
+        $('#cart-count').text(count);
+    }
+    $(document).ready(function () {
+        // Mở side menu
+        $('.side-menu a').on('click', function (e) {
+            e.preventDefault();
+            $('.side').addClass('open');
+        });
+
+        // Đóng side menu
+        $('.close-side').on('click', function () {
+            $('.side').removeClass('open');
+        });
+    });
+
+
 });

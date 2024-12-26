@@ -33,7 +33,7 @@ namespace Project.Controllers
         {
             // Lấy giỏ hàng từ Session
             var cartItems = GetCartFromSession();
-
+            ViewBag.CartItemCount = cartItems.Sum(item => item.Quantity);
             // Tính toán các giá trị
             var subTotal = cartItems.Sum(x => x.Quantity * x.Price);
             var tax = subTotal * 0.1m; // Thuế 10%
@@ -152,5 +152,7 @@ namespace Project.Controllers
                 grandTotal = grandTotal
             });
         }
+
+
     }
 }
