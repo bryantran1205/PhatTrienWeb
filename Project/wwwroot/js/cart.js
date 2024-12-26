@@ -15,8 +15,7 @@
             price: price
         }, function (response) {
             if (response.success) {
-                alert(response.message);
-                // Bạn có thể cập nhật giao diện giỏ hàng ở đây nếu cần
+                console.log(response.message); // Ghi log nếu cần
             }
         });
     });
@@ -37,9 +36,10 @@
             quantity: quantity
         }, function (response) {
             if (response.success) {
-                location.reload();
-            } else {
-                alert("Failed to update quantity.");
+                // Cập nhật tổng giá tiền trực tiếp trên giao diện
+                $(`#total-price-${productId}`).text(`$${response.newTotal}`);
+                $("#cart-subtotal").text(`$${response.subTotal}`);
+                $("#cart-grandtotal").text(`$${response.grandTotal}`);
             }
         });
     });

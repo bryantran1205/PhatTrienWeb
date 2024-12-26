@@ -28,7 +28,7 @@
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,7 @@
                                                data-product-id="@item.ProductId"
                                                value="@item.Quantity" min="1" />
                                     </td>
-                                    <td>$@item.Total</td>
+                                    <td id="total-price-@item.ProductId">$@item.Total</td>
                                     <td>
                                         <button class="btn btn-danger remove-from-cart" data-product-id="@item.ProductId">
                                             Remove
@@ -57,11 +57,17 @@
             </div>
         </div>
 
-        <div class="order-summary">
-            <h3>Order Summary</h3>
-            <p>Sub Total: $@Model.SubTotal</p>
-            <p>Tax: $@Model.Tax</p>
-            <h4>Grand Total: $@Model.GrandTotal</h4>
+        <div class="row my-5">
+            <div class="col-lg-8 col-sm-12">
+                <div class="col-lg-4 col-sm-12">
+                    <div class="order-box">
+                        <h3>Order summary</h3>
+                        <p>Subtotal: <span id="cart-subtotal">$@Model.SubTotal</span></p>
+                        <p>Tax: <span id="cart-tax">$@Model.Tax</span></p>
+                        <p>Grand Total: <span id="cart-grandtotal">$@Model.GrandTotal</span></p>
+                    </div>
+                </div>
+            </div>
         </div>
         <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
     </div>

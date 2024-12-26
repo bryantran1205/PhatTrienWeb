@@ -97,8 +97,21 @@ namespace Project.Controllers
             }
 
             SaveCartToSession(cart); // Cập nhật lại giỏ hàng trong Session
-            return Json(new { success = true});
+
+            // Tính toán lại các giá trị
+            var newTotal = item?.Quantity * item?.Price ?? 0;
+            var subTotal = cart.Sum(x => x.Quantity * x.Price);
+            var grandTotal = subTotal + (subTotal * 0.1m);
+
+            return Json(new
+            {
+                success = true,
+                newTotal = newTotal,
+                subTotal = subTotal,
+                grandTotal = grandTotal
+            });
         }
+
 
         // Xóa sản phẩm khỏi giỏ hàng
         [HttpPost]
