@@ -26,7 +26,10 @@
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                     </ul>
-                    <a class="cart" href="#">Add to Cart</a>
+                <a class="cart add-to-cart" href="#" data-product-id="@Model.Id"
+                   data-product-name="@Model.Name"
+                   data-image-url="@Model.ImagePath"
+                   data-price="@Model.Price">Add to Cart nè</a>
                 </div>
             </div>
             <div class="why-text">
@@ -50,3 +53,24 @@
             </div>
         </div>
     </div>
+<script>
+    $(document).on("click", ".add-to-cart", function (e) {
+        e.preventDefault();
+        const productId = $(this).data("product-id");
+        const productName = $(this).data("product-name");
+        const imageUrl = $(this).data("image-url");
+        const price = $(this).data("price");
+
+        $.post('/Product/AddToCart', {
+            productId: productId,
+            productName: productName,
+            imageUrl: imageUrl,
+            price: price
+        }, function (response) {
+            if (response.success) {
+                alert(response.message);
+            }
+        });
+    });
+
+</script>
