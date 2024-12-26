@@ -29,6 +29,7 @@ namespace Project.Controllers
             var cartJson = JsonConvert.SerializeObject(cart);
             HttpContext.Session.SetString(CartSessionKey, cartJson);
         }
+        [Route("Cart")]
         public IActionResult Cart()
         {
             // Lấy giỏ hàng từ Session

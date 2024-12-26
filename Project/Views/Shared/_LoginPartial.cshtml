@@ -70,41 +70,5 @@
         });
     });
 </script>
-@* <script>
-    $(document).ready(function () {
-        const dropdownId = '#userActionsSignedIn, #userActionsSignedOut';
-        const defaultValue = "temp"; // Giá trị mặc định của "Chọn hành động"
-
-        // Kiểm tra nếu đang ở trang Home/Index
-        const isHomePage = window.location.pathname === "/Home/Index";
-
-        // Nếu là trang Home/Index, đặt giá trị mặc định và không lấy từ LocalStorage
-        if (isHomePage) {
-            // Đặt giá trị mặc định cho dropdown
-            $(dropdownId).val(defaultValue).change(); // Đặt giá trị và kích hoạt thay đổi giao diện
-            $(dropdownId).selectpicker('refresh'); // Làm mới giao diện dropdown
-        } else {
-            // Nếu không phải trang Home/Index, lấy giá trị từ LocalStorage
-            const savedSelection = localStorage.getItem('userActionSelection');
-            if (savedSelection) {
-                $(dropdownId).selectpicker('val', savedSelection); // Đặt giá trị đã lưu
-                $(dropdownId).selectpicker('render'); // Cập nhật giao diện
-            }
-        }
-
-        // Xử lý khi người dùng thay đổi lựa chọn
-        $(dropdownId).on('change', function () {
-            const selectedValue = $(this).val(); // Lấy giá trị của option được chọn
-
-            if (selectedValue) {
-                // Lưu giá trị vào LocalStorage
-                localStorage.setItem('userActionSelection', selectedValue);
-
-                // Chuyển hướng đến URL tương ứng
-                window.location.href = selectedValue;
-            }
-        });
-    });
-</script> *@
 
 

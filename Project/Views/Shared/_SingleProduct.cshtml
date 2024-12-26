@@ -26,10 +26,7 @@
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                         <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                     </ul>
-                <a class="cart add-to-cart" href="#" data-product-id="@Model.Id"
-                   data-product-name="@Model.Name"
-                   data-image-url="@Model.ImagePath"
-                   data-price="@Model.Price">Add to Cart 2</a>
+               <partial name="_AddToCart" />
                 </div>
             </div>
             <div class="why-text">
