@@ -39,9 +39,8 @@
                                     <td>@item.ProductName</td>
                                     <td>$@item.Price.ToString("F2")</td>
                                     <td class="quantity-box">
-                                        <input type="number" class="quantity-input"
+                                        <input type="number" class="quantity-input c-input-text qty text"
                                                data-product-id="@item.ProductId"
-                                               class="c-input-text qty text"
                                                value="@item.Quantity" min="1" />
                                     </td>
                                     <td id="total-price-@item.ProductId">$@item.Total.ToString("F2")</td>

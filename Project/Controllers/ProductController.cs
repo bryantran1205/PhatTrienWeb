@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Project.AppData;
 using Project.Models;
@@ -21,7 +20,7 @@ namespace Project.Controllers
             var cartJson = HttpContext.Session.GetString(CartSessionKey);
             if (!string.IsNullOrEmpty(cartJson))
             {
-                return JsonConvert.DeserializeObject<List<CartItem>>(cartJson);
+                return JsonConvert.DeserializeObject<List<CartItem>>(cartJson) ?? new List<CartItem>();
             }
             return new List<CartItem>();
         }
@@ -32,10 +31,23 @@ namespace Project.Controllers
         }
         public IActionResult Cart()
         {
+            // Lấy giỏ hàng từ Session
+            var cartItems = GetCartFromSession();
+
+            // Tính toán các giá trị
+            var subTotal = cartItems.Sum(x => x.Quantity * x.Price);
+            var tax = subTotal * 0.1m; // Thuế 10%
+            var grandTotal = subTotal + tax;
+
+            // Chuẩn bị dữ liệu để gửi sang View
             var cart = new Cart
             {
-                Items = GetCartFromSession()
+                Items = cartItems,
+                SubTotal = subTotal,
+                Tax = tax,
+                GrandTotal = grandTotal
             };
+
             return View(cart);
         }
         public IActionResult Detail(int id)
