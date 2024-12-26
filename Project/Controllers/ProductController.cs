@@ -79,7 +79,6 @@ namespace Project.Controllers
             return Json(new { success = true, message = "Product added to cart successfully!" });
         }
 
-        // Cập nhật số lượng sản phẩm trong giỏ hàng
         [HttpPost]
         public IActionResult UpdateQuantity(int productId, int quantity)
         {
@@ -97,8 +96,8 @@ namespace Project.Controllers
                 }
             }
 
-            SaveCartToSession(cart); // Cập nhật giỏ hàng vào Session
-            return RedirectToAction("Cart");
+            SaveCartToSession(cart); // Cập nhật lại giỏ hàng trong Session
+            return Json(new { success = true});
         }
 
         // Xóa sản phẩm khỏi giỏ hàng
