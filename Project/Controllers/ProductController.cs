@@ -113,20 +113,32 @@ namespace Project.Controllers
         }
 
 
-        // Xóa sản phẩm khỏi giỏ hàng
         [HttpPost]
         public IActionResult RemoveFromCart(int productId)
         {
             var cart = GetCartFromSession();
 
+            // Tìm và xóa sản phẩm khỏi giỏ hàng
             var item = cart.FirstOrDefault(x => x.ProductId == productId);
             if (item != null)
             {
                 cart.Remove(item);
             }
 
-            SaveCartToSession(cart); // Cập nhật giỏ hàng vào Session
-            return RedirectToAction("Cart");
+            SaveCartToSession(cart); // Cập nhật lại giỏ hàng trong Session
+
+            // Tính toán lại các giá trị
+            var subTotal = cart.Sum(x => x.Quantity * x.Price);
+            var tax = subTotal * 0.1m; // Thuế 10%
+            var grandTotal = subTotal + tax;
+
+            return Json(new
+            {
+                success = true,
+                subTotal = subTotal,
+                tax = tax,
+                grandTotal = grandTotal
+            });
         }
     }
 }

@@ -37,13 +37,14 @@
                                 <tr>
                                     <td><img src="@item.ImageUrl" alt="@item.ProductName" style="width: 100px;" /></td>
                                     <td>@item.ProductName</td>
-                                    <td>$@item.Price</td>
-                                    <td>
+                                    <td>$@item.Price.ToString("F2")</td>
+                                    <td class="quantity-box">
                                         <input type="number" class="quantity-input"
                                                data-product-id="@item.ProductId"
+                                               class="c-input-text qty text"
                                                value="@item.Quantity" min="1" />
                                     </td>
-                                    <td id="total-price-@item.ProductId">$@item.Total</td>
+                                    <td id="total-price-@item.ProductId">$@item.Total.ToString("F2")</td>
                                     <td>
                                         <button class="btn btn-danger remove-from-cart" data-product-id="@item.ProductId">
                                             Remove
@@ -58,18 +59,25 @@
         </div>
 
         <div class="row my-5">
-            <div class="col-lg-8 col-sm-12">
-                <div class="col-lg-4 col-sm-12">
-                    <div class="order-box">
-                        <h3>Order summary</h3>
-                        <p>Subtotal: <span id="cart-subtotal">$@Model.SubTotal</span></p>
-                        <p>Tax: <span id="cart-tax">$@Model.Tax</span></p>
-                        <p>Grand Total: <span id="cart-grandtotal">$@Model.GrandTotal</span></p>
+            <div class="col-lg-8 col-sm-12"></div>
+            <div class="col-lg-4 col-sm-12">
+                <di v class="order-box">
+                    <h3>Order summary</h3>
+                    <div class="d-flex">
+                        <p>Subtotal: <span id="cart-subtotal">$@Model.SubTotal.ToString("F2")</span></p>
                     </div>
-                </div>
+                    <div class="d-flex">
+                        <p>Tax: <span id="cart-tax">$@Model.Tax.ToString("F2")</span></p>
+                    </div>
+                    <hr>
+                    <div class="d-flex gr-total">
+                        <p>Grand Total: <span id="cart-grandtotal">$@Model.GrandTotal.ToString("F2")</span></p>
+                        <hr>
+                    </div>
+                </di>
+                <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
             </div>
         </div>
-        <a href="/checkout" class="btn btn-success">Proceed to Checkout</a>
     </div>
 </div>
 <!-- End Cart -->
