@@ -3,7 +3,7 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model Project.Models.Product
-<a class="cart add-to-cart" href="#" data-product-id="@Model.Id"
+<a class="cart add-to-cart" href="@Url.Action("Cart", "Product")" data-product-id="@Model.Id"
    data-product-name="@Model.Name"
    data-image-url="@Model.ImagePath"
    data-price="@Model.Price">Add to Cart</a>
