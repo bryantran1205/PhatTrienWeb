@@ -16,6 +16,10 @@
         }, function (response) {
             if (response.success) {
                 alert(response.message); // Ghi log nếu cần
+                window.location.href = '/Cart';
+            }
+            else {
+                aler("Fail to add to cart")
             }
         });
     });
