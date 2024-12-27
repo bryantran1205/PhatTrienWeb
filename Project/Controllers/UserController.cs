@@ -73,6 +73,9 @@ namespace Project.Controllers
             {
                 var user = CreateUser();
                 user.Email = model.Email;
+                user.FirstName = model.FirstName; // Thêm FirstName
+                user.LastName = model.LastName;   // Thêm LastName
+                user.Address = model.Address;    // Thêm Address
 
                 await _userStore.SetUserNameAsync(user, model.Email, CancellationToken.None);
                 //await _emailStore.SetEmailAsync(user, model.Email, CancellationToken.None);

@@ -5,19 +5,34 @@ namespace Project.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "First Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at most {1} characters long.")]
+        public string? FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be at most {1} characters long.")]
+        public string? LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Address")]
+        [StringLength(200, ErrorMessage = "The {0} must be at most {1} characters long.")]
+        public string? Address { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email Address")]
-        public string ?Email { get; set; }
+        public string? Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string ?Password { get; set; }
+        public string? Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ?ConfirmPassword { get; set;  }
+        public string? ConfirmPassword { get; set; }
     }
 }
