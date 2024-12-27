@@ -6,8 +6,8 @@ using System.Linq;
 
 namespace Project.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")] // Chỉ cho phép Admin truy cập
     [Area("Admin")]
-    //[Authorize(Roles = "Admin")] // Chỉ cho phép Admin truy cập
     public class ProductController : Controller
     {
         private readonly AppDBContext _db;

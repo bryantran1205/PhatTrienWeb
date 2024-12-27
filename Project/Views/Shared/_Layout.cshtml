@@ -154,35 +154,35 @@
     @RenderBody()
     <!-- Start Instagram Feed  -->
     @{
-    var instagramImages = new List<string>
+        var instagramImages = new List<string>
     {
-        "/instagram-img-01.jpg",
-        "/instagram-img-02.jpg",
-        "/instagram-img-03.jpg",
-        "/instagram-img-04.jpg",
-        "/instagram-img-05.jpg",
-        "/instagram-img-06.jpg",
-        "/instagram-img-07.jpg",
-        "/instagram-img-08.jpg",
-        "/instagram-img-09.jpg",
-        "/instagram-img-05.jpg"
+    "/instagram-img-01.jpg",
+    "/instagram-img-02.jpg",
+    "/instagram-img-03.jpg",
+    "/instagram-img-04.jpg",
+    "/instagram-img-05.jpg",
+    "/instagram-img-06.jpg",
+    "/instagram-img-07.jpg",
+    "/instagram-img-08.jpg",
+    "/instagram-img-09.jpg",
+    "/instagram-img-05.jpg"
     };
-}
-<div class="instagram-box">
-    <div class="main-instagram owl-carousel owl-theme">
-        @foreach (var image in instagramImages)
-        {
-            <div class="item">
-                <div class="ins-inner-box">
-                    <img src="@Url.Content($"~/images{image}")" alt="Instagram Image" />
-                    <div class="hov-in">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+    }
+    <div class="instagram-box">
+        <div class="main-instagram owl-carousel owl-theme">
+            @foreach (var image in instagramImages)
+            {
+                <div class="item">
+                    <div class="ins-inner-box">
+                        <img src="@Url.Content($"~/images{image}")" alt="Instagram Image" />
+                        <div class="hov-in">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
 
     <!-- End Instagram Feed  -->
 

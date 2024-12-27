@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Project.AppData;
 using Project.Models;
@@ -62,7 +63,21 @@ namespace Project.Controllers
             }
             return View(p);
         }
+        [Route("product/listpro/{id}")]
+        public IActionResult ListPro(int id)
+        {
+            List<Product> proList;
 
+            if (id == 0)
+            {
+                proList = _db.Products.ToList();
+            }
+            else
+            {
+                proList = _db.Products.Where(p => p.CategoryId == id).ToList();
+            }
+            return View(proList);
+        }
         // Thêm sản phẩm vào giỏ hàng
         [HttpPost]
         public IActionResult AddToCart(int productId, string productName, string imageUrl, decimal price)

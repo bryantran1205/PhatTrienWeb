@@ -9,8 +9,13 @@ var connectionString = builder.Configuration.GetConnectionString("AppConnection"
 builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connectionString));
 //builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<AppDBContext>();
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
 //builder.Services.AddDefaultIdentity<IdentityContext>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<IdentityContext>();
+// Tắt Razor Pages của Identity
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/"); // Nếu cần, áp dụng ủy quyền
+}).WithRazorPagesRoot("/");
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/User/Login";
@@ -46,4 +51,20 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+await InitializeRolesAsync(app);
 app.Run();
+async Task InitializeRolesAsync(WebApplication app)
+{
+    var scope = app.Services.CreateScope();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    string[] roleNames = { "Admin", "User" };
+    foreach (var roleName in roleNames)
+    {
+        var roleExist = await roleManager.RoleExistsAsync(roleName);
+        if (!roleExist)
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+}
